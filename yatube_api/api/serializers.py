@@ -15,9 +15,10 @@ class PostSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('title','slug','description')
+        fields = ('title', 'slug', 'description')
         model = Group
-    
+
+
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         read_only=True, slug_field='username'
@@ -37,11 +38,17 @@ class FollowSerializer(serializers.ModelSerializer):
     following = serializers.SlugRelatedField(
         slug_field='username',
         queryset=User.objects.all()
-        )
+    )
 
     class Meta:
         model = Follow
         fields = ('user', 'following')
+        validators = [
+        UniqueTogetherValidator(
+                queryset=Follow.objects.all(),
+                fields=('user', 'following')
+            )
+        ]
 
     def validate(self, data):
         user = self.context['request'].user
@@ -49,10 +56,3 @@ class FollowSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Нельзя подписаться'
                                               'на самого себя')
         return data
-
-    validators = [
-        UniqueTogetherValidator(
-                queryset=Follow.objects.all(),
-                fields=('user', 'following')
-            )
-        ]
