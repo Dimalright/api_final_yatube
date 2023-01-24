@@ -5,9 +5,9 @@
 
 Доступен следующий функционал:
 
-Просмотр, создание, редактирование и удаление постов;
-Просмотр и создание групп;
-Подписки;
+Просмотр, создание, редактирование и удаление постов.
+Просмотр и создание групп.
+Подписки.
 Возможность комментирования постов, редактирования и удаления комментариев.
 
 **Технологии:**
@@ -24,9 +24,12 @@ git@github.com:Dimalright/api_final_yatube.git
 Win:
 python -m venv venv
 source venv/Scripts/activate
+
 Установите зависимости из файла requirements.txt:
 pip install -r requirements.txt
+
 Перейдите в директорию с файлом manage.py, создайте и примените миграции:
+
 cd yatube
 python manage.py makemigrations
 python manage.py migrate
