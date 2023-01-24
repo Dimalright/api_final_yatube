@@ -32,10 +32,15 @@ pip install -r requirements.txt
 
 cd yatube
 python manage.py makemigrations
+
 python manage.py migrate
+
 Создайте суперпользователя:
+
 python manage.py createsuperuser
+
 Запустите сервер:
+
 python manage.py runserver
 
 **Примеры обращений к эндпоинтам:**
